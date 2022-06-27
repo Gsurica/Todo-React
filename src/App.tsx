@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { RouterApp } from './routes'
+
+import { ThemeProvider } from '@mui/material'
+import { Light } from './shared/themes/Light'
+import { Dark } from './shared/themes/Dark'
 
 function App() {
+
+  const [theme, setTheme] = useState<Object>(Light)
+
+  const handleTheme = () => setTheme(theme === Light ? Dark : Light)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <RouterApp handleTheme={ handleTheme } />
+    </ThemeProvider>
   );
 }
 
